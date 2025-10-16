@@ -1,0 +1,14 @@
+  window.addEventListener("load", () => {
+    const slider = document.getElementById("slider");
+
+    // اول اسکرول رو از ابتدا صفر کن
+    slider.scrollLeft = 0;
+
+    // بعد از یه لحظه (برای اینکه المنت لود شه) شروع به حرکت کن
+    setTimeout(() => {
+      slider.scrollTo({
+        left: slider.scrollWidth,
+        behavior: "smooth"
+      });
+    }, 300); // ۳۰۰ میلی‌ثانیه تأخیر برای بارگذاری کامل
+  });
