@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دسته‌بندی کالا - Bendar Wood</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      background-color: #fff;
+      padding-bottom: 8vh;
+    }
+    header {
+      background-color: #284b63;
+      color: #fff;
+      padding: 2vh;
+      text-align: center;
+      font-size: 2.5vh;
+    }
+
+    .container {
+      padding: 2vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2vh;
+    }
+
+    .product {
+      display: flex;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .product img {
+      width: 40%;
+      aspect-ratio: 3 / 4; /* عکس‌های شما ۳×۴ هستن */
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 1.5vh;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1vh;
+    }
+
+    .product-info h2 {
+      font-size: 2.3vh;
+      color: #222;
+    }
+
+    .product-info p {
+      font-size: 1.8vh;
+      color: #555;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 1.8vh;
+      padding: 2vh;
+    }
+
+    .back {
+      position: fixed;
+      top: 2vh;
+      left: 2vh;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 5vh;
+      height: 5vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="back" onclick="history.back()">></div>
+  <header id="catTitle">دسته‌بندی کالا</header>
+
+  <div class="container" id="productList">
+    <!-- اینجا با جاوااسکریپت پر میشه -->
+  </div>
+
+  <footer>برای اطلاع از قیمت و سفارش پیام دهید</footer>
+
+  <script>
+    // گرفتن پارامتر از آدرس
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat');
+    const title = document.getElementById('catTitle');
+    const list = document.getElementById('productList');
+
+    // داده فرضی برای هر دسته
+    const data = {
+      decor: {
+        title: "دکوری و تزئینی",
+        items: [
+          {img: "img/1.jpg", name: "تابلو چوبی", desc: "طراحی طبیعی و مدرن"},
+          {img: "img/2.jpg", name: "مجسمه کوچک", desc: "دست‌ساز و خاص"},
+          {img: "img/3.jpg", name: "چراغ رومیزی چوبی", desc: "نور ملایم و زیبا"}
+        ]
+      },
+      gift: {
+        title: "پکیج هدیه",
+        items: [
+          {img: "img/5.jpg", name: "ست هدیه چوبی", desc: "شامل ماگ و تخته سرو"},
+          {img: "img/6.jpg", name: "پکیج خاص", desc: "هدیه‌ای متفاوت"}
+        ]
+      },
+      cup: {
+        title: "لیوان چوبی",
+        items: [
+          {img: "img/7.jpg", name: "لیوان طبیعی", desc: "ساخته شده از چوب گردو"},
+          {img: "img/8.jpg", name: "ست دو عددی", desc: "مناسب نوشیدنی گرم"}
+        ]
+      },
+      dish: {
+        title: "ظروف پذیرایی",
+        items: [
+          {img: "img/9.jpg", name: "ظرف پذیرایی بیضی", desc: "زیبا و مقاوم"},
+          {img: "img/10.jpg", name: "تخته سرو", desc: "برای سرو غذا و دسر"}
+        ]
+      }
+    };
+
+    // ست کردن عنوان و لیست محصولات
+    if (data[cat]) {
+      title.textContent = data[cat].title;
+      data[cat].items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="product-info">
+            <h2>${item.name}</h2>
+            <p>${item.desc}</p>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    } else {
+      list.innerHTML = "<p style='text-align:center;color:#777'>دسته‌بندی یافت نشد.</p>";
+    }
+  </script>
+</body>
+</html>
