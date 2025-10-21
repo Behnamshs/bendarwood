@@ -1,4 +1,4 @@
-  window.addEventListener("load", () => {
+   window.addEventListener("load", () => {
     const slider = document.getElementById("slider");
 
     // اول اسکرول رو از ابتدا صفر کن
@@ -11,4 +11,21 @@
         behavior: "smooth"
       });
     }, 300); // ۳۰۰ میلی‌ثانیه تأخیر برای بارگذاری کامل
+  });
+ 
+ window.addEventListener("load", () => {
+    const favoriteButtons = document.querySelectorAll('.favorite-btn');
+
+    favoriteButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const heartImg = btn.querySelector('img');
+        const src = heartImg.getAttribute('src');
+
+        if (src.includes('heart-white.png')) {
+          heartImg.setAttribute('src', 'icon/heart-red.png');
+        } else {
+          heartImg.setAttribute('src', 'icon/heart-white.png');
+        }
+      });
+    });
   });
